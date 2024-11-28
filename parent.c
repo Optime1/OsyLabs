@@ -82,6 +82,8 @@ int main() {
             input[bytes_read - 1] = '\0';
         }
         if (strcmp(input, "exit") == 0) {
+            write(pipe2[1], input, strlen(input) + 1);
+            write(pipe1[1], input, strlen(input) + 1);
             break;
         }
         randomInt = rand() % 5 + 1;

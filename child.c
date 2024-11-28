@@ -38,6 +38,10 @@ int main(int argc, char *argv[]) {
     ssize_t bytes_read;
     while ((bytes_read = read(STDIN_FILENO, buffer, sizeof(buffer) - 1)) > 0) {
         buffer[bytes_read - 1] = '\0';
+        if(strcmp(buffer, "exit") == 0){
+            close(file);
+            return 0;
+        }
         remove_vowels(buffer);
         if (write(file, buffer, strlen(buffer)) == -1 || write(file, "\n", 1) == -1) {
             const char *error_msg = "Error: failed to write to a file\n";
